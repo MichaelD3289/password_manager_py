@@ -51,7 +51,7 @@ def save_password():
     website_entry.focus()
 
 
-# ---------------------------- SAVE PASSWORD ------------------------------- #
+# ---------------------------- SEARCH PASSWORD ------------------------------- #
 
 def search_passwords():
     website = website_entry.get().lower()
@@ -61,13 +61,12 @@ def search_passwords():
     except FileNotFoundError:
         messagebox.showinfo(title="Error", message="You have no saved passwords. Add some now!")
     else:
-        try:
+        if website in data:
             email = data[website]['email']
             password = data[website]['password']
-        except KeyError:
-            messagebox.showinfo(title="Error", message="You don't have a saved password for that site. Add one now!")
+            messagebox.showinfo(title=website.title(), message=f"Email: {email}\nPassword: {password}")
         else:
-            messagebox.showinfo(title=website.title(), message=f"Username/Email: {email}\nPassword: {password}")
+            messagebox.showinfo(title="Error", message=f"You don't have a saved password for {website}. Add one now!")
 
 
 # ---------------------------- UI SETUP ------------------------------- #
